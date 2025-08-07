@@ -5,11 +5,17 @@
 
 int main()
 {
-    struct Array arr = { {8, 3, 9, 15, 6, 10, 7, 2, 12, 4}, 10 };
+    // struct Array arr = { {8, 3, 9, 15, 6, 10, 7, 2, 12, 4}, 10 };
 
     struct Array arr1 = { { 2, 4, 6, 8, 10 }, 5 };
 
-    struct Array arr2 = { { 2, 4, -6, -1, 10, -5, 9, 4, 7, -3 }, 10 };
+    struct Array arr2 = { { 1, 10, 5, 4, 9 }, 5 };
+
+    struct Array sortedArr1 = { { 2, 4, 6, 8, 10 }, 5 };
+
+    struct Array sortedArr2 = { { 1, 2, 6, 7, 10 }, 5 };
+
+    struct Array *arr3;
 
     // reverse(&arr, arr.length);
 
@@ -39,8 +45,16 @@ int main()
     // bool sorted = isSorted(arr1);
     // printf("%d\n", sorted);
 
-    negLeftSide(&arr2);
-    printArray(&arr2);
+    // struct Array arr4 = { { 2, 4, -6, -1, 10, -5, 9, 4, 7, -3 }, 10 };
+    // negLeftSide(&arr4);
+
+    // arr3 = mergeSortedArray(&arr1, &arr2);
+
+    // arr3 = unionNotSorted(&arr1, &arr2);
+
+    arr3 = unionSorted(&sortedArr1, &sortedArr2);
+
+    printArray(arr3);
 
     return 0;
 }

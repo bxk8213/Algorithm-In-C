@@ -14,6 +14,10 @@ void rotateLeft(Array *arr);
 bool isSorted(Array arr);
 void negLeftSide(Array *arr);
 void swap(Array *arr, int i, int j);
+Array * mergeSortedArray(Array *arr1, Array *arr2);
+Array * unionSorted(Array *arr1, Array *arr2);
+
+Array * unionNotSorted(Array *arr1, Array *arr2);
 
 void printArray(struct Array *arr);
 
