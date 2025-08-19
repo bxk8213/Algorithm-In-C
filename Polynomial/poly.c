@@ -39,9 +39,22 @@ int evaluate(struct Poly p)
 
     for(int i = 0; i < p.n; i++)
     {
-        printf("sum: %d\n", sum);
         sum += p.term[i].coff * pow(x, p.term[i].exp);
-        printf("sum: %d\n", sum);
+    }
+
+    return sum;
+}
+
+int evaluateMulti(struct Poly p)
+{
+    int sum = 0;
+    int x;
+
+    for(int i = 0; i < p.n; i++)
+    {
+        printf("Enter value of x for term %d: ", i+1);
+        scanf("%d", &x);
+        sum += p.term[i].coff * pow(x, p.term[i].exp);
     }
 
     return sum;
@@ -72,7 +85,13 @@ int main()
 
     display((*p1));
 
-    int res = evaluate((*p1));
+    int res;
+    
+    res = evaluate((*p1));
 
     printf("Evaluation of polynomial: %d\n", res);
+
+    res = evaluateMulti((*p1));
+
+    printf("Evaluation of multi-variable polynomial: %d\n", res);
 }
