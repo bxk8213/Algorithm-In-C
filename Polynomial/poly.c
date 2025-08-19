@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
+#include <math.h>
 
 struct Terms{
     int coff;
@@ -13,7 +14,6 @@ struct Poly{
 };
 
 void create(struct Poly *p){
-
     
     printf("Enter number of terms: ");
     scanf("%d", &p->n);
@@ -29,15 +29,34 @@ void create(struct Poly *p){
     }
 }
 
-void display(struct Poly p){
+int evaluate(struct Poly p)
+{
+    int sum = 0;
+    int x;
 
-
-    assert(p.n < 10); // verify n is less than 10.
+    printf("Enter value of x: ");
+    scanf("%d", &x);
 
     for(int i = 0; i < p.n; i++)
     {
+        printf("sum: %d\n", sum);
+        sum += p.term[i].coff * pow(x, p.term[i].exp);
+        printf("sum: %d\n", sum);
+    }
+
+    return sum;
+}
+
+void display(struct Poly p){
+
+    assert(p.n < 10); // verify n is less than 10.
+
+    int i;
+    for(i = 0; i < p.n - 1; i++)
+    {
         printf("%dX^%d + ", p.term[i].coff, p.term[i].exp);
     }
+    printf("%dX^%d\n", p.term[i].coff, p.term[i].exp);
 }
 
 
@@ -52,4 +71,8 @@ int main()
     create(p1);
 
     display((*p1));
+
+    int res = evaluate((*p1));
+
+    printf("Evaluation of polynomial: %d\n", res);
 }
