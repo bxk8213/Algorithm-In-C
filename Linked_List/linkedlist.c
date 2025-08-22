@@ -92,6 +92,110 @@ int maxNum(Node *head){
     return maxElement;
 }
 
+int recMaxNum(Node *head, Node *curr){
+
+    int maxElement;
+
+    if(curr->next == NULL)
+        return curr->data;
+
+
+    maxElement = recMaxNum(head, curr->next);
+
+    if(maxElement < curr->data)
+        return curr->data;
+    
+    else 
+        return maxElement;
+    
+}
+
+int ternaryMaxNum(Node *head, Node *curr){
+
+    int max;
+
+    if(curr->next == NULL)
+        return curr->data;
+    
+    max = ternaryMaxNum(head, curr->next);
+
+    return max > curr->data ? max : curr->data;
+}
+
+int linearSearch(Node *head, int target){
+
+    Node *curr = head;
+
+    while(curr != NULL && curr->data != target){
+            curr = curr->next;
+    }
+
+    if(curr != NULL)
+        return curr->data;
+    else
+        return 0;
+}
+
+/*
+    Move to head approach: 
+        Data that are recently searched are move to top position.
+*/
+Node * improvedLinearSearch(Node *head, int target){  
+    
+    Node *curr = head, *prev = NULL;
+
+    while(curr != NULL){
+
+        if(target == curr->data){
+            prev->next = curr->next;
+            curr->next = head;
+            head = curr;
+            return head;
+        }
+
+        prev = curr;
+        curr = curr->next;
+        
+    }
+
+    return head;
+
+}
+
+Node * insert(Node *head, int position, int value){
+
+    Node *newNode = (Node*)malloc(sizeof(Node));
+    newNode->data = value;
+    newNode->next = NULL;
+
+    if(position == 0)
+    {
+        newNode->next = head;
+        head = newNode;
+    }
+    else if(position > 0)
+    {
+        Node *curr = head;
+
+        for(int i = 0; i < position - 1 && curr != NULL; i++){
+            curr = curr->next;
+        }
+
+        if(curr != NULL)
+        {
+            newNode->next = curr->next;
+            curr->next = newNode;
+        }
+    }
+    else
+    {
+        printf("Not valid position.");
+    }
+    
+    return head;
+    
+}
+
 int main(){
 
     int A[] = {3, 13, 5, 19, 16, 18};
@@ -120,6 +224,34 @@ int main(){
     printf("\nTotal Nodes: %d\n", resu);
 
     int max = maxNum(head);
-    printf("Max Element: %d", max);
+    printf("Max Element: %d\n", max);
 
+    int recMax = recMaxNum(head, curr);
+    printf("Max Element: %d\n", recMax);
+
+    int terMax = ternaryMaxNum(head, curr);
+    printf("Max ter Element: %d\n", terMax);
+
+    int data = linearSearch(head, 14);
+    if(!data){
+        printf("Data not found\n");
+    }
+    else{
+        printf("Data found: %d\n", data);
+    }
+
+    // head = improvedLinearSearch(head, 16);
+
+    display(head);
+
+    printf("\n");
+    head = insert(head, 4, 6);
+    head = insert(head, 0, 7);
+    head = insert(head, 8, 12);
+    head = insert(head, 3, 2);
+
+
+    display(head);
+
+ 
 }
